@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dad6a364633ecf4db273174b63e6031, type: 3}
-  m_Name: QuestionSystem
+  m_Name: QuestionSystem 1
   m_EditorClassIdentifier: 
-  Question: how are u
+  Question: what your name
   answer:
-  - 1
-  - 2
-  - 3
-  - 4
+  - a
+  - b
+  - c
+  - d
   correctAnswer: 0

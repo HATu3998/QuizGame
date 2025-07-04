@@ -27,6 +27,7 @@ public class Timer : MonoBehaviour
             {
                 isAnsweringQuestion = false;
                 TimeValue = timeToShowCorrectAnswers;
+                loadNextQuestion = true;
             }
         }
         //chua tra loi cau hoi
@@ -39,6 +40,7 @@ public class Timer : MonoBehaviour
             {
                 isAnsweringQuestion = true;
                 TimeValue = timeToCompleteQuestion;
+                loadNextQuestion = true;
             }
         }
 
@@ -47,8 +49,9 @@ public class Timer : MonoBehaviour
         Debug.Log(isAnsweringQuestion+ ":"+  TimeValue + "= "+ fillFraction);
     }
     //ham huy thoi gian, khi skip cau hoi
-    void Canceltimer()
+   public void Canceltimer()
     {
         TimeValue = 0;
     }
+
 }
