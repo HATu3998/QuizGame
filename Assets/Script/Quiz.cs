@@ -17,7 +17,7 @@ public class Quiz : MonoBehaviour
     [Header("Answer")]
     [SerializeField] GameObject[] buttonAnswer;
     int correctAnswerIndex;
-    bool hasAnswerEarly;
+    bool hasAnswerEarly =true;
 
     [Header("Button")]
     [SerializeField] Sprite defaultAnswerSprite;
@@ -27,12 +27,21 @@ public class Quiz : MonoBehaviour
     [SerializeField] Image timerImage;
     Timer timer;
 
+    [Header("Score")]
+    [SerializeField] TextMeshProUGUI scoreText;
+    ScoreKeeper scoreKeeper;
+    [Header("ProgressBar")]
+    [SerializeField] Slider progressBar;
+    public bool isComplete;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         // DisplayQuestion();
         timer = FindFirstObjectByType<Timer>();
-       
+        scoreKeeper = FindFirstObjectByType<ScoreKeeper>();
+        progressBar.maxValue = questions.Count;
 
 
     }
@@ -43,6 +52,12 @@ public class Quiz : MonoBehaviour
 
         if (timer.loadNextQuestion)
         {
+            if (progressBar.value == progressBar.maxValue)
+            {
+                isComplete = true;
+                return;
+            }
+
             getNextQuestion();
             timer.loadNextQuestion = false;
         }
@@ -53,6 +68,7 @@ public class Quiz : MonoBehaviour
             DisplayAnswer(-1);
             buttonState(false);
         }
+       
     }
     void DisplayAnswer(int index)
     {
@@ -61,6 +77,7 @@ public class Quiz : MonoBehaviour
             textQuiz.text = "correct!!";
             Image buttonImage = buttonAnswer[index].GetComponent<Image>();
             buttonImage.sprite = correctAnswerSprite;
+            scoreKeeper.incrementCorrectAnswer();
 
         }
         else
@@ -99,6 +116,7 @@ public class Quiz : MonoBehaviour
         DisplayAnswer(index);
         timer.Canceltimer();
         buttonState(false);
+        scoreText.text = scoreKeeper.calculate() + "%";
     }
     void getNextQuestion()
     {
@@ -109,6 +127,8 @@ public class Quiz : MonoBehaviour
             buttonState(true);
             GetRandomQuestion();
             DisplayQuestion();
+            progressBar.value++;
+            scoreKeeper.incrementQuestionSeen();
         }
 
     }
