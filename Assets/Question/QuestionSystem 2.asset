@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dad6a364633ecf4db273174b63e6031, type: 3}
   m_Name: QuestionSystem 2
   m_EditorClassIdentifier: 
-  Question: where do you live
+  Question: where do you live (3)
   answer:
   - 5
   - 6
   - 7
   - 8
-  correctAnswer: 0
+  correctAnswer: 3
